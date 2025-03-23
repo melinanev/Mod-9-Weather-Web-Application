@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
 dotenv.config();
 
 // Import the routes
@@ -18,6 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Implement middleware to connect the routes
 app.use('/api/weather', weatherRoutes);
+
+// Get the directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Catch-all route to return the index.html file
 app.get('*', (req: Request, res: Response) => {
